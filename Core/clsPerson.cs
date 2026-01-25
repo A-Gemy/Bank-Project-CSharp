@@ -1,30 +1,43 @@
 ﻿namespace Bank_Project_CSharp.Core
 {
-    internal class clsPerson
+    internal abstract class clsPerson
     {
-        private string _FirstName { get; set; }
-        private string _LastName { get; set; }
-        private string _Email { get; set; }
-        private string _Phone { get; set; }
+        protected string _FirstName;
+        protected string _LastName;
+        protected string _Email;
+        protected string _Phone;
 
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-
-        public string FullName
+        public string FirstName
         {
-            get => _FirstName + " " + _LastName;
+            get => _FirstName;
+            protected set => _FirstName = value;
+        }
+        public string LastName
+        {
+            get => _LastName;
+            protected set => _LastName = value;
+        }
+        public string Email
+        {
+            get => _Email;
+            protected set => _Email = value;
+        }
+        public string Phone
+        {
+            get => _Phone;
+            protected set => _Phone = value;
         }
 
+        public string FullName => $"{FirstName} {LastName}";
 
-        clsPerson(string firstName, string lastName, string email, string phone)
+
+        protected clsPerson(string firstName, string lastName, string email, string phone)
         {
-            _FirstName = firstName;
-            _LastName = lastName;
-            _Email = email;
-            _Phone = phone;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Phone = phone;
         }
 
     }
