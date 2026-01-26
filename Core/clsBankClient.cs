@@ -7,12 +7,18 @@ namespace Bank_Project_CSharp.Core
     internal class clsBankClient : clsPerson
     {
 
-        #region Private Declaration
+        #region Constants & Enums
 
-        private const string _FileName = "Core/Clients.txt";
+        private static readonly string _FileName =
+            Path.Combine(AppContext.BaseDirectory, "Core", "Clients.txt");
         private const string _Separator = "#//#";
 
         internal enum enMode { EmptyMode = 0, UpdateMode = 1 };
+
+        #endregion
+
+
+        #region Private Fields
 
         private enMode _Mode;
         private string _AccountNumber;
@@ -44,7 +50,29 @@ namespace Bank_Project_CSharp.Core
         #endregion
 
 
-        #region Private Methods (Internal Logic)
+        #region Constructor
+
+        internal clsBankClient(
+            enMode mode,
+            string firstName,
+            string lastName,
+            string email,
+            string phone,
+            string accountNumber,
+            string pinCode,
+            decimal accountBalance)
+            : base(firstName, lastName, email, phone)
+        {
+            _Mode = mode;
+            _AccountNumber = accountNumber;
+            _PinCode = pinCode;
+            _AccountBalance = accountBalance;
+        }
+
+        #endregion
+
+
+        #region Private Helper Methods (Internal Logic)
 
         private static clsBankClient _ConvertLineToClientObject(string line)
         {
@@ -86,6 +114,12 @@ namespace Bank_Project_CSharp.Core
 
         private static List<clsBankClient> _LoadAllClients()
         {
+            string folder = Path.GetDirectoryName(_FileName);
+            if (!string.IsNullOrEmpty(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
             List<clsBankClient> clients = new List<clsBankClient>();
 
             if (!File.Exists(_FileName))
@@ -102,32 +136,57 @@ namespace Bank_Project_CSharp.Core
             return clients;
         }
 
-        #endregion
-
-
-        #region Constructor
-
-        internal clsBankClient(
-            enMode mode,
-            string firstName,
-            string lastName,
-            string email,
-            string phone,
-            string accountNumber,
-            string pinCode,
-            decimal accountBalance)
-            : base(firstName, lastName, email, phone)
+        private string _ConvertClientToLine()
         {
-            _Mode = mode;
-            _AccountNumber = accountNumber;
-            _PinCode = pinCode;
-            _AccountBalance = accountBalance;
+            return string.Join(_Separator,
+                FirstName,
+                LastName,
+                Email,
+                Phone,
+                AccountNumber,
+                PinCode,
+                AccountBalance.ToString()
+            );
+        }
+
+        private void _SaveClientsDataToFile(List<clsBankClient> clients)
+        {
+            string folder = Path.GetDirectoryName(_FileName);
+            if (!string.IsNullOrEmpty(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            using (StreamWriter writer = new StreamWriter(_FileName, false))
+            {
+                foreach (clsBankClient client in clients)
+                {
+                    writer.WriteLine(client._ConvertClientToLine());
+                }
+            }
+
+        }
+
+        private void _Update()
+        {
+            List<clsBankClient> _clients = _LoadAllClients();
+
+            for (int i = 0; i < _clients.Count; i++)
+            {
+                if (_clients[i].AccountNumber == this.AccountNumber)
+                {
+                    _clients[i] = this;
+                    break;
+                }
+            }
+
+            _SaveClientsDataToFile(_clients);
         }
 
         #endregion
 
 
-        #region Public Methods
+        #region Public Static Methods (Factory / Queries)
 
         public static clsBankClient Find(string accountNumber)
         {
@@ -163,6 +222,11 @@ namespace Bank_Project_CSharp.Core
             return !Find(accountNumber).IsEmptyClient;
         }
 
+        #endregion
+
+
+        #region Public Instance Methods
+
         public void Print()
         {
             Console.WriteLine("\nClient Card:");
@@ -173,8 +237,42 @@ namespace Bank_Project_CSharp.Core
             Console.WriteLine($"Email       : {Email}");
             Console.WriteLine($"Phone       : {Phone}");
             Console.WriteLine($"Acc. Number : {AccountNumber}");
-            Console.WriteLine($"Balance     : {AccountBalance}");
+            Console.WriteLine($"Balance     : {AccountBalance:C}");
             Console.WriteLine("___________________");
+        }
+
+        public bool Save()
+        {
+            switch (_Mode)
+            {
+                case enMode.EmptyMode:
+                    {
+                        return false;
+                    }
+
+                case enMode.UpdateMode:
+                    {
+                        _Update();
+                        return true;
+                    }
+
+            }
+            return false;
+        }
+
+        #endregion
+
+
+        #region Internal Update Methods
+
+        internal void UpdateClientInfo(string firstName, string lastName, string email, string phone, string pinCode, decimal balance)
+        {
+            _FirstName = firstName;
+            _LastName = lastName;
+            _Email = email;
+            _Phone = phone;
+            _PinCode = pinCode;
+            _AccountBalance = balance;
         }
 
         #endregion
