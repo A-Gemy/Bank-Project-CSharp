@@ -13,7 +13,9 @@ namespace Bank_Project_CSharp.Core
             Path.Combine(AppContext.BaseDirectory, "Core", "Clients.txt");
         private const string _Separator = "#//#";
 
-        internal enum enMode { EmptyMode = 0, UpdateMode = 1 };
+        internal enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
+
+        internal enum enSaveResults { svFailedEmptyObject = 0, svSucceeded = 1, svFailedAccountNumberExists = 2 };
 
         #endregion
 
@@ -183,6 +185,20 @@ namespace Bank_Project_CSharp.Core
             _SaveClientsDataToFile(_clients);
         }
 
+        private void _AddNew()
+        {
+            string folder = Path.GetDirectoryName(_FileName);
+            if (!string.IsNullOrEmpty(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            using (StreamWriter writer = new StreamWriter(_FileName, true))
+            {
+                writer.WriteLine(_ConvertClientToLine());
+            }
+        }
+
         #endregion
 
 
@@ -222,6 +238,14 @@ namespace Bank_Project_CSharp.Core
             return !Find(accountNumber).IsEmptyClient;
         }
 
+        public static clsBankClient GetAddNewClientObject(string accountNumber)
+        {
+            return new clsBankClient(
+                enMode.AddNewMode,
+                "", "", "", "", accountNumber, "", 0m
+                );
+        }
+
         #endregion
 
 
@@ -241,23 +265,35 @@ namespace Bank_Project_CSharp.Core
             Console.WriteLine("___________________");
         }
 
-        public bool Save()
+        public enSaveResults Save()
         {
             switch (_Mode)
             {
                 case enMode.EmptyMode:
                     {
-                        return false;
+                        return enSaveResults.svFailedEmptyObject;
                     }
 
                 case enMode.UpdateMode:
                     {
                         _Update();
-                        return true;
+                        return enSaveResults.svSucceeded;
                     }
-
+                case enMode.AddNewMode:
+                    {
+                        if (IsClientExist(_AccountNumber))
+                        {
+                            return enSaveResults.svFailedAccountNumberExists;
+                        }
+                        else
+                        {
+                            _AddNew();
+                            _Mode = enMode.UpdateMode;
+                            return enSaveResults.svSucceeded;
+                        }
+                    }
             }
-            return false;
+            return enSaveResults.svFailedEmptyObject;
         }
 
         #endregion
