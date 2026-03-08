@@ -199,6 +199,19 @@ namespace Bank_Project_CSharp.Core
             }
         }
 
+        private void _Reset()
+        {
+            // Reset current object
+            _Mode = enMode.EmptyMode;
+            _FirstName = "";
+            _LastName = "";
+            _Email = "";
+            _Phone = "";
+            _AccountNumber = "";
+            _PinCode = "";
+            _AccountBalance = 0m;
+        }
+
         #endregion
 
 
@@ -296,6 +309,31 @@ namespace Bank_Project_CSharp.Core
             return enSaveResults.svFailedEmptyObject;
         }
 
+        public bool Delete()
+        {
+            List<clsBankClient> clients = _LoadAllClients();
+            List<clsBankClient> updatedClients = new List<clsBankClient>();
+            bool found = false;
+
+            foreach (clsBankClient client in clients)
+            {
+                if (client.AccountNumber == _AccountNumber)
+                {
+                    found = true;
+                    continue;
+                }
+
+                updatedClients.Add(client);
+            }
+
+            if (!found)
+                return false;
+
+            _SaveClientsDataToFile(updatedClients);
+            _Reset();
+            return true;
+        }
+
         #endregion
 
 
@@ -312,6 +350,9 @@ namespace Bank_Project_CSharp.Core
         }
 
         #endregion
+
+
+
 
 
     }
