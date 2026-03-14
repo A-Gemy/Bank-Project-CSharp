@@ -268,6 +268,20 @@ namespace Bank_Project_CSharp.Core
             return _LoadAllClients();
         }
 
+        public static decimal GetTotalBalances()
+        {
+            decimal totalBalances = 0m;
+
+            List<clsBankClient> clients = _LoadAllClients();
+
+            foreach (clsBankClient client in clients)
+            {
+                totalBalances += client.AccountBalance;
+            }
+
+            return totalBalances;
+        }
+
         #endregion
 
 
