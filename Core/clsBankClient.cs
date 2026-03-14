@@ -131,7 +131,11 @@ namespace Bank_Project_CSharp.Core
             {
                 if (!string.IsNullOrWhiteSpace(line))
                 {
-                    clients.Add(_ConvertLineToClientObject(line));
+                    clsBankClient client = _ConvertLineToClientObject(line);
+                    if (!client.IsEmptyClient)
+                    {
+                        clients.Add(client);
+                    }
                 }
             }
 
@@ -259,6 +263,11 @@ namespace Bank_Project_CSharp.Core
                 );
         }
 
+        public static List<clsBankClient> GetClientsList()
+        {
+            return _LoadAllClients();
+        }
+
         #endregion
 
 
@@ -350,9 +359,6 @@ namespace Bank_Project_CSharp.Core
         }
 
         #endregion
-
-
-
 
 
     }

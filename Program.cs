@@ -1,5 +1,6 @@
 ﻿using Bank_Project_CSharp.Core;
 using System;
+using System.Collections.Generic;
 
 namespace Bank_Project_CSharp
 {
@@ -164,7 +165,6 @@ namespace Bank_Project_CSharp
                 if (client.Delete())
                 {
                     Console.WriteLine("Client Deleted Successfully :-)");
-                    client.Print();
                 }
                 else
                 {
@@ -177,13 +177,97 @@ namespace Bank_Project_CSharp
             }
         }
 
+        private const int AccWidth = 15;
+        private const int NameWidth = 20;
+        private const int PhoneWidth = 12;
+        private const int EmailWidth = 30;
+        private const int PinWidth = 10;
+        private const int BalanceWidth = 12;
+
+        static string GetClientsHeader()
+        {
+            return
+                $"| {"Account Number",-AccWidth} " +
+                $"| {"Client Name",-NameWidth} " +
+                $"| {"Phone",-PhoneWidth} " +
+                $"| {"Email",-EmailWidth} " +
+                $"| {"Pin Code",-PinWidth} " +
+                $"| {"Balance",BalanceWidth} |";
+        }
+
+        static void PrintClientsListHeader(string title)
+        {
+            string header = GetClientsHeader();
+            string border = new string('=', header.Length);
+            string separator = new string('-', header.Length);
+            int titlePadding = (header.Length - title.Length) / 2;
+
+            Console.WriteLine();
+            Console.WriteLine(border);
+            Console.WriteLine(new string(' ', titlePadding) + title);
+            Console.WriteLine(border);
+            Console.WriteLine(header);
+            Console.WriteLine(separator);
+        }
+
+        static void PrintClientRecordLine(clsBankClient client)
+        {
+            Console.WriteLine(
+                $"| {client.AccountNumber,-AccWidth} " +
+                $"| {client.FullName,-NameWidth} " +
+                $"| {client.Phone,-PhoneWidth} " +
+                $"| {client.Email,-EmailWidth} " +
+                $"| {client.PinCode,-PinWidth} " +
+                $"| {client.AccountBalance,BalanceWidth:F2} |");
+        }
+
+        static void PrintClientsListBody(List<clsBankClient> clients)
+        {
+            string header = GetClientsHeader();
+
+            if (clients.Count == 0)
+            {
+                string message = "No clients available in the system.";
+                Console.WriteLine($"| {message.PadRight(header.Length - 4)} |");
+                return;
+            }
+
+            foreach (clsBankClient client in clients)
+            {
+                PrintClientRecordLine(client);
+            }
+        }
+
+        static void PrintClientsListFooter(int totalClients)
+        {
+            string header = GetClientsHeader();
+            string border = new string('=', header.Length);
+            string footerText = $"Total Clients: {totalClients}";
+            int padding = (header.Length - footerText.Length) / 2;
+
+            Console.WriteLine(border);
+            Console.WriteLine(new string(' ', padding) + footerText);
+            Console.WriteLine(border);
+        }
+
+        static void ShowClientsList()
+        {
+            List<clsBankClient> clients = clsBankClient.GetClientsList();
+
+            PrintClientsListHeader("CLIENT LIST");
+            PrintClientsListBody(clients);
+            PrintClientsListFooter(clients.Count);
+        }
+
 
         static void Main(string[] args)
         {
 
             //UpdateClient();
             //AddNewClient();
-            DeleteClient();
+            //DeleteClient();
+            ShowClientsList();
+
 
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
