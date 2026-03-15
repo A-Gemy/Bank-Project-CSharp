@@ -1,4 +1,5 @@
 ﻿using Bank_Project_CSharp.Core;
+using Bank_Project_CSharp.Screens;
 using System;
 using System.Collections.Generic;
 
@@ -341,7 +342,10 @@ namespace Bank_Project_CSharp
             //AddNewClient();
             //DeleteClient();
             //ShowClientsList();
-            ShowTotalBalances();
+            //ShowTotalBalances();
+
+            clsMainScreen.ShowMainMenu();
+
 
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();

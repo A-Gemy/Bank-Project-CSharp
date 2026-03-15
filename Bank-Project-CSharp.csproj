@@ -47,6 +47,8 @@
     <Compile Include="Core\clsPerson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\clsMainScreen.cs" />
+    <Compile Include="Screens\clsScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
