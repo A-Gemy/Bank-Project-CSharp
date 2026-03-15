@@ -59,8 +59,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowAllClientsScreen()
         {
             Console.Clear();
-            DrawScreenHeader("SHOW CLIENTS SCREEN", width: 45);
-            Console.WriteLine("Show Client List Screen will be here.");
+            clsShowClientsListScreen.ShowClientsList();
             GoBackToMainMenu();
         }
 

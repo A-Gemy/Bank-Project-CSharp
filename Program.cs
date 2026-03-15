@@ -178,89 +178,7 @@ namespace Bank_Project_CSharp
             }
         }
 
-        private const int AccWidth = 15;
-        private const int NameWidth = 20;
-        private const int PhoneWidth = 12;
-        private const int EmailWidth = 30;
-        private const int PinWidth = 10;
-        private const int BalanceWidth = 15;
 
-        static string GetClientsHeader()
-        {
-            return
-                $"| {"Account Number",-AccWidth} " +
-                $"| {"Client Name",-NameWidth} " +
-                $"| {"Phone",-PhoneWidth} " +
-                $"| {"Email",-EmailWidth} " +
-                $"| {"Pin Code",-PinWidth} " +
-                $"| {"Balance",BalanceWidth} |";
-        }
-
-        static void PrintClientsListHeader(string title)
-        {
-            string header = GetClientsHeader();
-            string border = new string('=', header.Length);
-            string separator = new string('-', header.Length);
-            int titlePadding = (header.Length - title.Length) / 2;
-
-            Console.WriteLine();
-            Console.WriteLine(border);
-            Console.WriteLine(new string(' ', titlePadding) + title);
-            Console.WriteLine(border);
-            Console.WriteLine(header);
-            Console.WriteLine(separator);
-        }
-
-        static void PrintClientRecordLine(clsBankClient client)
-        {
-            Console.WriteLine(
-                $"| {client.AccountNumber,-AccWidth} " +
-                $"| {client.FullName,-NameWidth} " +
-                $"| {client.Phone,-PhoneWidth} " +
-                $"| {client.Email,-EmailWidth} " +
-                $"| {client.PinCode,-PinWidth} " +
-                $"| {client.AccountBalance,BalanceWidth:C} |");
-        }
-
-        static void PrintClientsListBody(List<clsBankClient> clients)
-        {
-            string header = GetClientsHeader();
-
-            if (clients.Count == 0)
-            {
-                string message = "No clients available in the system.";
-                Console.WriteLine($"| {message.PadRight(header.Length - 4)} |");
-                return;
-            }
-
-            foreach (clsBankClient client in clients)
-            {
-                PrintClientRecordLine(client);
-            }
-        }
-
-        static void PrintClientsListFooter(int totalClients)
-        {
-            string header = GetClientsHeader();
-            string border = new string('=', header.Length);
-            string footerText = $"Total Clients: {totalClients}";
-            int padding = (header.Length - footerText.Length) / 2;
-
-            Console.WriteLine(border);
-            Console.WriteLine(new string(' ', padding) + footerText);
-            Console.WriteLine(border);
-        }
-
-        static void ShowClientsList()
-        {
-            List<clsBankClient> clients = clsBankClient.GetClientsList();
-
-            PrintClientsListHeader("CLIENT LIST");
-            PrintClientsListBody(clients);
-            PrintClientsListFooter(clients.Count);
-        }
-
-        /************************************/
         private const int BalanceAccWidth = 18;
         private const int BalanceNameWidth = 25;
         private const int BalanceAmountWidth = 15;
@@ -347,8 +265,7 @@ namespace Bank_Project_CSharp
             clsMainScreen.ShowMainMenu();
 
 
-            Console.WriteLine("\nPress any key to exit...");
-            Console.ReadKey();
+
         }
     }
 }
