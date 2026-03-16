@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bank_Project_CSharp.Core;
+using System;
 
 namespace Bank_Project_CSharp.Screens
 {
@@ -32,6 +33,52 @@ namespace Bank_Project_CSharp.Screens
             int leftPadding = (width - text.Length) / 2;
             return new string(' ', leftPadding) + text;
         }
+
+        protected static clsBankClient ReadClientByAccountNumber(string prompt = "\nPlease Enter Account Number: ")
+        {
+            Console.Write(prompt);
+            string accountNumber = Console.ReadLine()?.Trim() ?? "";
+
+            while (!clsBankClient.IsClientExist(accountNumber))
+            {
+                Console.WriteLine("Account Number is not found.");
+                Console.Write(prompt);
+                accountNumber = Console.ReadLine()?.Trim() ?? "";
+            }
+
+            return clsBankClient.Find(accountNumber);
+        }
+
+        protected static void ReadClientInfo(
+            out string firstName,
+            out string lastName,
+            out string email,
+            out string phone,
+            out string pinCode,
+            out decimal balance)
+        {
+            Console.Write("\nEnter First Name: ");
+            firstName = Console.ReadLine()?.Trim() ?? "";
+
+            Console.Write("Enter Last Name: ");
+            lastName = Console.ReadLine()?.Trim() ?? "";
+
+            Console.Write("Enter Email: ");
+            email = Console.ReadLine()?.Trim() ?? "";
+
+            Console.Write("Enter Phone: ");
+            phone = Console.ReadLine()?.Trim() ?? "";
+
+            Console.Write("Enter Pin Code: ");
+            pinCode = Console.ReadLine()?.Trim() ?? "";
+
+            Console.Write("Enter Account Balance: ");
+            while (!decimal.TryParse(Console.ReadLine(), out balance))
+            {
+                Console.Write("Invalid number, enter Account Balance again: ");
+            }
+        }
+
 
     }
 }

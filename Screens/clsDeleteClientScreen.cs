@@ -6,25 +6,6 @@ namespace Bank_Project_CSharp.Screens
     internal class clsDeleteClientScreen : clsScreen
     {
 
-        private static string ReadAccountNumber()
-        {
-            Console.Write("\nPlease Enter Account Number: ");
-            return Console.ReadLine()?.Trim() ?? "";
-        }
-
-        private static clsBankClient ReadClientToDelete()
-        {
-            string accountNumber = ReadAccountNumber();
-
-            while (!clsBankClient.IsClientExist(accountNumber))
-            {
-                Console.Write("Account Number is not found.");
-                accountNumber = ReadAccountNumber();
-            }
-
-            return clsBankClient.Find(accountNumber);
-        }
-
         private static char ReadDeleteConfirmation()
         {
             char answer;
@@ -45,7 +26,7 @@ namespace Bank_Project_CSharp.Screens
         {
             DrawScreenHeader("DELETE CLIENT SCREEN");
 
-            clsBankClient client = ReadClientToDelete();
+            clsBankClient client = ReadClientByAccountNumber();
             client.Print();
 
             char answer = ReadDeleteConfirmation();
