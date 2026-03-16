@@ -63,11 +63,10 @@ namespace Bank_Project_CSharp.Screens
             GoBackToMainMenu();
         }
 
-        private static void ShowAddNewClientsScreen()
+        private static void ShowAddNewClientScreen()
         {
             Console.Clear();
-            DrawScreenHeader("ADD NEW CLIENT SCREEN", width: 45);
-            Console.WriteLine("Add New Client Screen will be here.");
+            clsAddNewClientScreen.ShowAddNewClientScreen();
             GoBackToMainMenu();
         }
 
@@ -127,7 +126,7 @@ namespace Bank_Project_CSharp.Screens
                     break;
 
                 case enMainMenuOptions.eAddNewClient:
-                    ShowAddNewClientsScreen();
+                    ShowAddNewClientScreen();
                     break;
 
                 case enMainMenuOptions.eDeleteClient:
