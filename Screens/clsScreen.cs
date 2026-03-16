@@ -36,17 +36,19 @@ namespace Bank_Project_CSharp.Screens
 
         protected static clsBankClient ReadClientByAccountNumber(string prompt = "\nPlease Enter Account Number: ")
         {
-            Console.Write(prompt);
-            string accountNumber = Console.ReadLine()?.Trim() ?? "";
-
-            while (!clsBankClient.IsClientExist(accountNumber))
+            while (true)
             {
-                Console.WriteLine("Account Number is not found.");
                 Console.Write(prompt);
-                accountNumber = Console.ReadLine()?.Trim() ?? "";
-            }
+                string accountNumber = Console.ReadLine()?.Trim() ?? "";
 
-            return clsBankClient.Find(accountNumber);
+                if (string.Equals(accountNumber, "q", StringComparison.OrdinalIgnoreCase))
+                    return null;
+
+                if (clsBankClient.IsClientExist(accountNumber))
+                    return clsBankClient.Find(accountNumber);
+
+                Console.WriteLine("Account Number is not found. Enter a valid one or press [Q] to cancel.");
+            }
         }
 
         protected static void ReadClientInfo(

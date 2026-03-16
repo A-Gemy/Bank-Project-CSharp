@@ -26,7 +26,13 @@ namespace Bank_Project_CSharp.Screens
         {
             DrawScreenHeader("DELETE CLIENT SCREEN");
 
-            clsBankClient client = ReadClientByAccountNumber();
+            clsBankClient client = ReadClientByAccountNumber("\nPlease Enter Account Number or [Q] to cancel: ");
+            if (client == null)
+            {
+                Console.WriteLine("\nOperation cancelled.");
+                return;
+            }
+
             client.Print();
 
             char answer = ReadDeleteConfirmation();

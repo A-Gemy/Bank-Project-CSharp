@@ -26,7 +26,13 @@ namespace Bank_Project_CSharp.Screens
         {
             DrawScreenHeader("UPDATE CLIENT SCREEN");
 
-            clsBankClient client = ReadClientByAccountNumber("\nPlease Enter Client Account Number: ");
+            clsBankClient client = ReadClientByAccountNumber("\nPlease Enter Client Account Number or [Q] to cancel: ");
+            if (client == null)
+            {
+                Console.WriteLine("\nOperation cancelled.");
+                return;
+            }
+
             client.Print();
 
             Console.WriteLine("\nUpdate Client Info:");

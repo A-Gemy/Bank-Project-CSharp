@@ -87,8 +87,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowFindClientScreen()
         {
             Console.Clear();
-            DrawScreenHeader("FIND CLIENT SCREEN", width: 45);
-            Console.WriteLine("Find Client Screen will be here.");
+            clsFindClientScreen.ShowFindClientScreen();
             GoBackToMainMenu();
         }
 
