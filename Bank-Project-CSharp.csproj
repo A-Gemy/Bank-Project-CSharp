@@ -47,6 +47,8 @@
     <Compile Include="Core\clsPerson.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\clsAddNewClientScreen.cs" />
+    <Compile Include="Screens\clsDeleteClientScreen.cs" />
     <Compile Include="Screens\clsMainScreen.cs" />
     <Compile Include="Screens\clsScreen.cs" />
     <Compile Include="Screens\clsShowClientsListScreen.cs" />

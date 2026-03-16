@@ -73,8 +73,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowDeleteClientScreen()
         {
             Console.Clear();
-            DrawScreenHeader("DELETE CLIENT SCREEN", width: 45);
-            Console.WriteLine("Delete Client Screen will be here.");
+            clsDeleteClientScreen.ShowDeleteClientScreen();
             GoBackToMainMenu();
         }
 

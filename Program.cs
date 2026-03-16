@@ -88,46 +88,6 @@ namespace Bank_Project_CSharp
             }
         }
 
-        static void DeleteClient()
-        {
-            Console.Write("\nPlease Enter Account Number: ");
-            string accountNumber = Console.ReadLine()?.Trim() ?? "";
-
-            while (!clsBankClient.IsClientExist(accountNumber))
-            {
-                Console.Write("Account Number is not found. Enter existing one: ");
-                accountNumber = Console.ReadLine()?.Trim() ?? "";
-            }
-
-            clsBankClient client = clsBankClient.Find(accountNumber);
-            client.Print();
-
-            char answer;
-            do
-            {
-                Console.Write("\nAre you sure you want to delete this client (y/n)? ");
-                answer = char.ToLower(Console.ReadKey().KeyChar);
-            }
-            while (answer != 'y' && answer != 'n');
-            Console.WriteLine();
-
-            if (answer == 'y')
-            {
-                if (client.Delete())
-                {
-                    Console.WriteLine("Client Deleted Successfully :-)");
-                }
-                else
-                {
-                    Console.WriteLine("Error: client was not deleted.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Operation cancelled.");
-            }
-        }
-
 
         private const int BalanceAccWidth = 18;
         private const int BalanceNameWidth = 25;
