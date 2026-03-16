@@ -80,8 +80,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowUpdateClientScreen()
         {
             Console.Clear();
-            DrawScreenHeader("UPDATE CLIENT SCREEN", width: 45);
-            Console.WriteLine("Update Client Screen will be here.");
+            clsUpdateClientScreen.ShowUpdateClientScreen();
             GoBackToMainMenu();
         }
 
