@@ -1,0 +1,104 @@
+﻿using System;
+
+namespace Bank_Project_CSharp.Screens
+{
+    internal class clsTransactionsScreen : clsScreen
+    {
+        private enum enTransactionsMenuOptions
+        {
+            eDeposit = 1,
+            eWithdraw = 2,
+            eShowTotalBalances = 3,
+            eShowMainMenu = 4
+        }
+
+        private static short ReadTransactionsMenuOption()
+        {
+            short choice;
+
+            Console.Write("Choose what do you want to do? [1 to 4]? ");
+            while (!short.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 4)
+            {
+                Console.Write("Invalid choice, enter a number between 1 and 4: ");
+            }
+
+            return choice;
+        }
+
+        private static void ShowTransactionsMenuOptions()
+        {
+            const int width = 45;
+            string border = new string('-', width);
+
+            Console.WriteLine(border);
+            Console.WriteLine(CenterText("TRANSACTIONS MENU", width));
+            Console.WriteLine(border);
+            Console.WriteLine("   [1] Deposit");
+            Console.WriteLine("   [2] Withdraw");
+            Console.WriteLine("   [3] Total Balances");
+            Console.WriteLine("   [4] Main Menu");
+            Console.WriteLine(border);
+        }
+
+        private static void GoBackToTransactionsMenu()
+        {
+            Console.WriteLine("\nPress any key to go back to Transactions Menu...");
+            Console.ReadKey();
+            ShowTransactionsMenu();
+        }
+
+        private static void ShowDepositScreen()
+        {
+            Console.Clear();
+            Console.WriteLine("Deposit Screen will be here.");
+            GoBackToTransactionsMenu();
+        }
+
+        private static void ShowWithdrawScreen()
+        {
+            Console.Clear();
+            Console.WriteLine("Withdraw Screen will be here.");
+            GoBackToTransactionsMenu();
+        }
+
+        private static void ShowTotalBalancesScreen()
+        {
+            Console.Clear();
+            Console.WriteLine("Total Balances Screen will be here.");
+            GoBackToTransactionsMenu();
+        }
+
+        private static void PerformTransactionsMenuOption(enTransactionsMenuOptions transactionsMenuOption)
+        {
+            switch (transactionsMenuOption)
+            {
+                case enTransactionsMenuOptions.eDeposit:
+                    ShowDepositScreen();
+                    break;
+
+                case enTransactionsMenuOptions.eWithdraw:
+                    ShowWithdrawScreen();
+                    break;
+
+                case enTransactionsMenuOptions.eShowTotalBalances:
+                    ShowTotalBalancesScreen();
+                    break;
+
+                case enTransactionsMenuOptions.eShowMainMenu:
+                    return;
+            }
+        }
+
+
+        public static void ShowTransactionsMenu()
+        {
+            const int width = 45;
+
+            Console.Clear();
+            DrawScreenHeader("TRANSACTIONS SCREEN", width: width);
+            ShowTransactionsMenuOptions();
+            PerformTransactionsMenuOption((enTransactionsMenuOptions)ReadTransactionsMenuOption());
+        }
+
+    }
+}

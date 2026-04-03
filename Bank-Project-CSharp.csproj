@@ -53,6 +53,7 @@
     <Compile Include="Screens\clsMainScreen.cs" />
     <Compile Include="Screens\clsScreen.cs" />
     <Compile Include="Screens\clsShowClientsListScreen.cs" />
+    <Compile Include="Screens\clsTransactionsScreen.cs" />
     <Compile Include="Screens\clsUpdateClientScreen.cs" />
   </ItemGroup>
   <ItemGroup>

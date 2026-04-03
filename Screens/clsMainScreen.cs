@@ -93,10 +93,7 @@ namespace Bank_Project_CSharp.Screens
 
         private static void ShowTransactionsMenuScreen()
         {
-            Console.Clear();
-            DrawScreenHeader("TRANSACTIONS MENU SCREEN", width: 45);
-            Console.WriteLine("Transactions Menu Screen will be here.");
-            GoBackToMainMenu();
+            clsTransactionsScreen.ShowTransactionsMenu();
         }
 
         private static void ShowManageUsersMenuScreen()
