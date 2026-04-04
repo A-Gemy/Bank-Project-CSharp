@@ -57,7 +57,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowWithdrawScreen()
         {
             Console.Clear();
-            Console.WriteLine("Withdraw Screen will be here.");
+            clsWithdrawScreen.ShowWithdrawScreen();
             GoBackToTransactionsMenu();
         }
 

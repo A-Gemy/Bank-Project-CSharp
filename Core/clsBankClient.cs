@@ -366,6 +366,17 @@ namespace Bank_Project_CSharp.Core
             _Update();
             return true;
         }
+
+        public bool Withdraw(decimal amount)
+        {
+            if (IsEmpty || amount <= 0 || amount > _AccountBalance)
+                return false;
+
+            _AccountBalance -= amount;
+            _Update();
+            return true;
+        }
+
         #endregion
 
 
