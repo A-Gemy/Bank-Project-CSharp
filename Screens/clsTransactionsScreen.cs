@@ -50,7 +50,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowDepositScreen()
         {
             Console.Clear();
-            Console.WriteLine("Deposit Screen will be here.");
+            clsDepositScreen.ShowDepositScreen();
             GoBackToTransactionsMenu();
         }
 

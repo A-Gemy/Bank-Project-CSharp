@@ -94,6 +94,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowTransactionsMenuScreen()
         {
             clsTransactionsScreen.ShowTransactionsMenu();
+            GoBackToMainMenu();
         }
 
         private static void ShowManageUsersMenuScreen()

@@ -357,6 +357,15 @@ namespace Bank_Project_CSharp.Core
             return true;
         }
 
+        public bool Deposit(decimal amount)
+        {
+            if (IsEmpty || amount <= 0)
+                return false;
+
+            _AccountBalance += amount;
+            _Update();
+            return true;
+        }
         #endregion
 
 
