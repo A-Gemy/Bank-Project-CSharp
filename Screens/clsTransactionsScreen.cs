@@ -64,7 +64,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowTotalBalancesScreen()
         {
             Console.Clear();
-            Console.WriteLine("Total Balances Screen will be here.");
+            clsTotalBalancesScreen.ShowTotalBalancesScreen();
             GoBackToTransactionsMenu();
         }
 
