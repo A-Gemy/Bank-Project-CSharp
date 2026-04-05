@@ -58,6 +58,7 @@
     <Compile Include="Screens\Transactions\clsTotalBalancesScreen.cs" />
     <Compile Include="Screens\Transactions\clsTransactionsScreen.cs" />
     <Compile Include="Screens\Transactions\clsWithdrawScreen.cs" />
+    <Compile Include="Screens\Users\clsManageUsersScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,8 +68,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Screens\Users\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

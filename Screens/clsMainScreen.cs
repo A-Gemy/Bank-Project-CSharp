@@ -99,9 +99,7 @@ namespace Bank_Project_CSharp.Screens
 
         private static void ShowManageUsersMenuScreen()
         {
-            Console.Clear();
-            DrawScreenHeader("MANAGE USERS SCREEN", width: 45);
-            Console.WriteLine("Manage Users Screen will be here.");
+            clsManageUsersScreen.ShowManageUsersMenu();
             GoBackToMainMenu();
         }
 
