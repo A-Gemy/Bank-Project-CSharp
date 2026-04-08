@@ -59,6 +59,7 @@
     <Compile Include="Screens\Transactions\clsTotalBalancesScreen.cs" />
     <Compile Include="Screens\Transactions\clsTransactionsScreen.cs" />
     <Compile Include="Screens\Transactions\clsWithdrawScreen.cs" />
+    <Compile Include="Screens\Users\clsAddNewUserScreen.cs" />
     <Compile Include="Screens\Users\clsManageUsersScreen.cs" />
     <Compile Include="Screens\Users\clsShowUsersListScreen.cs" />
   </ItemGroup>

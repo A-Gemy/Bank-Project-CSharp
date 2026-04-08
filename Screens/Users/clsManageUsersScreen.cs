@@ -61,7 +61,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowAddNewUserScreen()
         {
             Console.Clear();
-            Console.WriteLine("Add New User Screen will be here.");
+            clsAddNewUserScreen.ShowAddNewUserScreen();
             GoBackToManageUsersMenu();
         }
 
