@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Core\clsBankClient.cs" />
     <Compile Include="Core\clsPerson.cs" />
+    <Compile Include="Core\clsUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\Clients\clsAddNewClientScreen.cs" />
@@ -59,12 +60,16 @@
     <Compile Include="Screens\Transactions\clsTransactionsScreen.cs" />
     <Compile Include="Screens\Transactions\clsWithdrawScreen.cs" />
     <Compile Include="Screens\Users\clsManageUsersScreen.cs" />
+    <Compile Include="Screens\Users\clsShowUsersListScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Clients.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Core\Users.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

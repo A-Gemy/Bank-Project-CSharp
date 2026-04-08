@@ -54,7 +54,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowListUsersScreen()
         {
             Console.Clear();
-            Console.WriteLine("List Users Screen will be here.");
+            clsShowUsersListScreen.ShowUsersList();
             GoBackToManageUsersMenu();
         }
 
