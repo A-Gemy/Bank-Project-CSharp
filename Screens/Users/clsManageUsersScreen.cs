@@ -68,7 +68,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowDeleteUserScreen()
         {
             Console.Clear();
-            Console.WriteLine("Delete User Screen will be here.");
+            clsDeleteUserScreen.ShowDeleteUserScreen();
             GoBackToManageUsersMenu();
         }
 

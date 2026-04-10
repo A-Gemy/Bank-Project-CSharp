@@ -51,6 +51,24 @@ namespace Bank_Project_CSharp.Screens
             }
         }
 
+        protected static clsUser ReadUserByUserName(string prompt = "\nPlease Enter User Name: ")
+        {
+            while (true)
+            {
+
+                Console.Write(prompt);
+                string userName = Console.ReadLine()?.Trim() ?? "";
+
+                if (string.Equals(userName, "q", StringComparison.OrdinalIgnoreCase))
+                    return null;
+
+                if (clsUser.IsUserExist(userName))
+                    return clsUser.Find(userName);
+
+                Console.WriteLine("User Name is not found. Enter a valid one or press [Q] to cancel.");
+            }
+        }
+
         protected static void ReadClientInfo(
             out string firstName,
             out string lastName,
