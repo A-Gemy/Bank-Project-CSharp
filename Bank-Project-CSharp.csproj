@@ -63,6 +63,7 @@
     <Compile Include="Screens\Users\clsDeleteUserScreen.cs" />
     <Compile Include="Screens\Users\clsManageUsersScreen.cs" />
     <Compile Include="Screens\Users\clsShowUsersListScreen.cs" />
+    <Compile Include="Screens\Users\clsUpdateUserScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -69,6 +69,79 @@ namespace Bank_Project_CSharp.Screens
             }
         }
 
+        protected static bool ReadYesNo(string message)
+        {
+            char answer;
+
+            do
+            {
+                Console.Write(message);
+                answer = char.ToLower(Console.ReadKey().KeyChar);
+                Console.WriteLine();
+            } while (answer != 'y' && answer != 'n');
+
+            return answer == 'y';
+        }
+
+        protected static int ReadUserPermissions()
+        {
+            int permissions = 0;
+
+            if (ReadYesNo("\nDo you want to give full access? y/n? "))
+                return (int)clsUser.enPermissions.pAll;
+
+            Console.WriteLine("\nDo you want to give access to:");
+
+            if (ReadYesNo("\nShow Client List? y/n? "))
+                permissions |= (int)clsUser.enPermissions.pListClients;
+
+            if (ReadYesNo("\nAdd New Client? y/n? "))
+                permissions |= (int)clsUser.enPermissions.pAddNewClient;
+
+            if (ReadYesNo("\nDelete Client? y/n? "))
+                permissions |= (int)clsUser.enPermissions.pDeleteClient;
+
+            if (ReadYesNo("\nUpdate Client? y/n? "))
+                permissions |= (int)clsUser.enPermissions.pUpdateClient;
+
+            if (ReadYesNo("\nFind Client? y/n? "))
+                permissions |= (int)clsUser.enPermissions.pFindClient;
+
+            if (ReadYesNo("\nTransactions? y/n? "))
+                permissions |= (int)clsUser.enPermissions.pTransactions;
+
+            if (ReadYesNo("\nManage Users? y/n? "))
+                permissions |= (int)clsUser.enPermissions.pManageUsers;
+
+            return permissions;
+        }
+
+        protected static void ReadUserInfo(out string firstName,
+            out string lastName,
+            out string email,
+            out string phone,
+            out string password,
+            out int permissions)
+        {
+            Console.Write("\nEnter First Name: ");
+            firstName = Console.ReadLine()?.Trim() ?? "";
+
+            Console.Write("Enter Last Name: ");
+            lastName = Console.ReadLine()?.Trim() ?? "";
+
+            Console.Write("Enter Email: ");
+            email = Console.ReadLine()?.Trim() ?? "";
+
+            Console.Write("Enter Phone: ");
+            phone = Console.ReadLine()?.Trim() ?? "";
+
+            Console.Write("Enter Password: ");
+            password = Console.ReadLine()?.Trim() ?? "";
+
+            permissions = ReadUserPermissions();
+        }
+
+
         protected static void ReadClientInfo(
             out string firstName,
             out string lastName,

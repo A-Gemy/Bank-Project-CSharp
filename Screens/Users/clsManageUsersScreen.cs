@@ -75,7 +75,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowUpdateUserScreen()
         {
             Console.Clear();
-            Console.WriteLine("Update User Screen will be here.");
+            clsUpdateUserScreen.ShowUpdateUserScreen();
             GoBackToManageUsersMenu();
         }
 
