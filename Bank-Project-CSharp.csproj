@@ -61,6 +61,7 @@
     <Compile Include="Screens\Transactions\clsWithdrawScreen.cs" />
     <Compile Include="Screens\Users\clsAddNewUserScreen.cs" />
     <Compile Include="Screens\Users\clsDeleteUserScreen.cs" />
+    <Compile Include="Screens\Users\clsFindUserScreen.cs" />
     <Compile Include="Screens\Users\clsManageUsersScreen.cs" />
     <Compile Include="Screens\Users\clsShowUsersListScreen.cs" />
     <Compile Include="Screens\Users\clsUpdateUserScreen.cs" />

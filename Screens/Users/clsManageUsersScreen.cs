@@ -82,7 +82,7 @@ namespace Bank_Project_CSharp.Screens
         private static void ShowFindUserScreen()
         {
             Console.Clear();
-            Console.WriteLine("Find User Screen will be here.");
+            clsFindUserScreen.ShowFindUserScreen();
             GoBackToManageUsersMenu();
         }
 
