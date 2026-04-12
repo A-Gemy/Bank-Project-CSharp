@@ -6,7 +6,7 @@ namespace Bank_Project_CSharp
     {
         static void Main(string[] args)
         {
-            clsMainScreen.ShowMainMenu();
+            clsLoginScreen.ShowLoginScreen();
 
         }
     }
