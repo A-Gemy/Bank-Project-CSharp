@@ -14,7 +14,8 @@ namespace Bank_Project_CSharp.Screens
             eFindClient = 5,
             eShowTransactionsMenu = 6,
             eManageUsers = 7,
-            eLogout = 8
+            eShowLoginRegister = 8,
+            eLogout = 9
         }
 
 
@@ -22,10 +23,10 @@ namespace Bank_Project_CSharp.Screens
         {
             short choice;
 
-            Console.Write("Choose what do you want to do? [1 to 8]? ");
-            while (!short.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 8)
+            Console.Write("Choose what do you want to do? [1 to 9]? ");
+            while (!short.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 9)
             {
-                Console.Write("Invalid choice, enter a number between 1 and 8: ");
+                Console.Write("Invalid choice, enter a number between 1 and 9: ");
             }
 
             return choice;
@@ -46,7 +47,8 @@ namespace Bank_Project_CSharp.Screens
             Console.WriteLine("   [5] Find Client");
             Console.WriteLine("   [6] Transactions");
             Console.WriteLine("   [7] Manage Users");
-            Console.WriteLine("   [8] Logout");
+            Console.WriteLine("   [8] Login Register");
+            Console.WriteLine("   [9] Logout");
             Console.WriteLine(border);
         }
 
@@ -104,6 +106,13 @@ namespace Bank_Project_CSharp.Screens
             GoBackToMainMenu();
         }
 
+        private static void ShowLoginRegisterScreen()
+        {
+            Console.Clear();
+            clsLoginRegisterScreen.ShowLoginRegisterScreen();
+            GoBackToMainMenu();
+        }
+
         private static void Logout()
         {
             Global.CurrentUser = clsUser.Find("", "");
@@ -141,12 +150,15 @@ namespace Bank_Project_CSharp.Screens
                     ShowManageUsersMenuScreen();
                     break;
 
+                case enMainMenuOptions.eShowLoginRegister:
+                    ShowLoginRegisterScreen();
+                    break;
+
                 case enMainMenuOptions.eLogout:
                     Logout();
                     break;
             }
         }
-
 
 
         public static void ShowMainMenu()

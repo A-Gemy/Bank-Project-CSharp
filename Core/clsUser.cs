@@ -156,6 +156,28 @@ namespace Bank_Project_CSharp.Core
             return users;
         }
 
+        private static List<string[]> _LoadLoginRegisterList()
+        {
+            List<string[]> loginRegisters = new List<string[]>();
+
+            if (!File.Exists(_LoginRegisterFileName))
+                return loginRegisters;
+
+            string[] lines = File.ReadAllLines(_LoginRegisterFileName);
+
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                string[] loginData = line.Split(new string[] { _Separator }, StringSplitOptions.None);
+
+                if (loginData.Length == 3)
+                    loginRegisters.Add(loginData);
+            }
+            return loginRegisters;
+        }
+
         private string _ConvertUserToLine()
         {
             return string.Join(_Separator,
@@ -284,6 +306,11 @@ namespace Bank_Project_CSharp.Core
         public static List<clsUser> GetUsersList()
         {
             return _LoadAllUsers();
+        }
+
+        public static List<string[]> GetLoginRegisterList()
+        {
+            return _LoadLoginRegisterList();
         }
 
         #endregion
