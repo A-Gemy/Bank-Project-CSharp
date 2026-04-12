@@ -8,6 +8,9 @@ namespace Bank_Project_CSharp.Screens
 
         public static void ShowAddNewClientScreen()
         {
+            if (!CheckAccessRights(clsUser.enPermissions.pAddNewClient))
+                return;
+
             DrawScreenHeader("ADD NEW CLIENT SCREEN", width: 45);
 
             Console.Write("\nPlease Enter New Client Account Number: ");

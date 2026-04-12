@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bank_Project_CSharp.Core;
+using System;
 
 namespace Bank_Project_CSharp.Screens
 {
@@ -118,6 +119,9 @@ namespace Bank_Project_CSharp.Screens
 
         public static void ShowManageUsersMenu()
         {
+            if (!CheckAccessRights(clsUser.enPermissions.pManageUsers))
+                return;
+
             const int width = 45;
 
             Console.Clear();

@@ -349,6 +349,14 @@ namespace Bank_Project_CSharp.Core
             return true;
         }
 
+        public bool CheckAccessPermission(enPermissions permissions)
+        {
+            if (Permissions == (int)enPermissions.pAll)
+                return true;
+
+            return ((int)permissions & Permissions) == (int)permissions;
+        }
+
         #endregion
 
 

@@ -24,6 +24,9 @@ namespace Bank_Project_CSharp.Screens
 
         public static void ShowUpdateClientScreen()
         {
+            if (!CheckAccessRights(clsUser.enPermissions.pUpdateClient))
+                return;
+
             DrawScreenHeader("UPDATE CLIENT SCREEN");
 
             clsBankClient client = ReadClientByAccountNumber("\nPlease Enter Client Account Number or [Q] to cancel: ");

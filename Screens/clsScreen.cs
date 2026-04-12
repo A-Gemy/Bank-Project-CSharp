@@ -173,5 +173,19 @@ namespace Bank_Project_CSharp.Screens
         }
 
 
+        protected static bool CheckAccessRights(clsUser.enPermissions permission)
+        {
+            if (!Global.CurrentUser.CheckAccessPermission(permission))
+            {
+                Console.Clear();
+                Console.WriteLine("\n______________________________________");
+                Console.WriteLine("  Access Denied! Contact your Admin.");
+                Console.WriteLine("______________________________________\n");
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

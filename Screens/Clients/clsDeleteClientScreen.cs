@@ -24,6 +24,9 @@ namespace Bank_Project_CSharp.Screens
 
         public static void ShowDeleteClientScreen()
         {
+            if (!CheckAccessRights(clsUser.enPermissions.pDeleteClient))
+                return;
+
             DrawScreenHeader("DELETE CLIENT SCREEN");
 
             clsBankClient client = ReadClientByAccountNumber("\nPlease Enter Account Number or [Q] to cancel: ");

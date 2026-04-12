@@ -7,6 +7,9 @@ namespace Bank_Project_CSharp.Screens
     {
         public static void ShowFindClientScreen()
         {
+            if (!CheckAccessRights(clsUser.enPermissions.pFindClient))
+                return;
+
             DrawScreenHeader("FIND CLIENT SCREEN");
 
             clsBankClient client = ReadClientByAccountNumber("\nPlease Enter Account Number or [Q] to cancel: ");

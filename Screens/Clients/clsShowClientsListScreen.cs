@@ -83,6 +83,9 @@ namespace Bank_Project_CSharp.Screens
 
         public static void ShowClientsList()
         {
+            if (!CheckAccessRights(clsUser.enPermissions.pListClients))
+                return;
+
             List<clsBankClient> clients = clsBankClient.GetClientsList();
 
             DrawScreenHeader("SHOW CLIENTS SCREEN", width: GetClientsHeader().Length);

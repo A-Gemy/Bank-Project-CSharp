@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bank_Project_CSharp.Core;
+using System;
 
 namespace Bank_Project_CSharp.Screens
 {
@@ -92,6 +93,9 @@ namespace Bank_Project_CSharp.Screens
 
         public static void ShowTransactionsMenu()
         {
+            if (!CheckAccessRights(clsUser.enPermissions.pTransactions))
+                return;
+
             const int width = 45;
 
             Console.Clear();
