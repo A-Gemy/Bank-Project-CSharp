@@ -5,6 +5,8 @@ namespace Bank_Project_CSharp.Screens
 {
     internal class clsLoginScreen : clsScreen
     {
+        private const short MaxFailedLoginTrials = 3;
+
         private static bool TryLogin(string username, string password)
         {
             Global.CurrentUser = clsUser.Find(username, password);
@@ -13,16 +15,16 @@ namespace Bank_Project_CSharp.Screens
 
         public static bool ShowLoginScreen()
         {
-            bool loginFailed = false;
+            short failedLoginTrials = 0;
 
             while (true)
             {
                 Console.Clear();
                 DrawScreenHeader("LOGIN SCREEN", width: 45);
 
-                if (loginFailed)
+                if (failedLoginTrials > 0)
                 {
-                    Console.WriteLine("Invalid User Name/Password!\n");
+                    Console.WriteLine($"Invalid User Name/Password! Trials left: {MaxFailedLoginTrials - failedLoginTrials}\n");
                 }
 
                 Console.Write("Enter User Name or [Q] to exit: ");
@@ -40,9 +42,20 @@ namespace Bank_Project_CSharp.Screens
                     return true;
                 }
 
-                loginFailed = true;
+                failedLoginTrials++;
+
+                if (failedLoginTrials >= MaxFailedLoginTrials)
+                {
+                    Console.Clear();
+                    DrawScreenHeader("LOGIN SCREEN", width: 45);
+                    Console.WriteLine("System is locked after 3 failed login attempts.");
+                    Console.WriteLine("\nPress any key to close the application...");
+                    Console.ReadKey();
+                    return false;
+                }
             }
 
         }
+
     }
 }
