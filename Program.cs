@@ -6,8 +6,12 @@ namespace Bank_Project_CSharp
     {
         static void Main(string[] args)
         {
-            clsLoginScreen.ShowLoginScreen();
+            bool runApp = true;
 
+            while (runApp)
+            {
+                runApp = clsLoginScreen.ShowLoginScreen();
+            }
         }
     }
 }

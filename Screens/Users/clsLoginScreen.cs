@@ -11,11 +11,11 @@ namespace Bank_Project_CSharp.Screens
             return !Global.CurrentUser.IsEmptyUser;
         }
 
-        private static void Login()
+        public static bool ShowLoginScreen()
         {
             bool loginFailed = false;
 
-            do
+            while (true)
             {
                 Console.Clear();
                 DrawScreenHeader("LOGIN SCREEN", width: 45);
@@ -25,22 +25,24 @@ namespace Bank_Project_CSharp.Screens
                     Console.WriteLine("Invalid User Name/Password!\n");
                 }
 
-                Console.Write("Enter User Name: ");
+                Console.Write("Enter User Name or [Q] to exit: ");
                 string userName = Console.ReadLine()?.Trim() ?? "";
+
+                if (string.Equals(userName, "q", StringComparison.OrdinalIgnoreCase))
+                    return false;
 
                 Console.Write("Enter Password: ");
                 string password = Console.ReadLine()?.Trim() ?? "";
 
-                loginFailed = !TryLogin(userName, password);
+                if (TryLogin(userName, password))
+                {
+                    clsMainScreen.ShowMainMenu();
+                    return true;
+                }
 
-            } while (loginFailed);
+                loginFailed = true;
+            }
 
-            clsMainScreen.ShowMainMenu();
-        }
-
-        public static void ShowLoginScreen()
-        {
-            Login();
         }
     }
 }
