@@ -11,6 +11,10 @@ namespace Bank_Project_CSharp.Core
 
         private static readonly string _FileName =
             Path.Combine(AppContext.BaseDirectory, "Core", "Users.txt");
+
+        private static readonly string _LoginRegisterFileName =
+            Path.Combine(AppContext.BaseDirectory, "Core", "LoginRegister.txt");
+
         private const string _Separator = "#//#";
 
         internal enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 }
@@ -163,6 +167,15 @@ namespace Bank_Project_CSharp.Core
                 Password,
                 Permissions.ToString()
             );
+        }
+
+        private string _ConvertLoginRegisterLine()
+        {
+            return string.Join(_Separator,
+                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                UserName,
+                Permissions.ToString()
+                );
         }
 
         private void _SaveUsersDataToFile(List<clsUser> users)
@@ -355,6 +368,20 @@ namespace Bank_Project_CSharp.Core
                 return true;
 
             return ((int)permissions & Permissions) == (int)permissions;
+        }
+
+        public void RegisterLogin()
+        {
+            string folder = Path.GetDirectoryName(_LoginRegisterFileName);
+            if (!string.IsNullOrEmpty(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            using (StreamWriter sw = new StreamWriter(_LoginRegisterFileName, true))
+            {
+                sw.WriteLine(_ConvertLoginRegisterLine());
+            }
         }
 
         #endregion

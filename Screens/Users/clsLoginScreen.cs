@@ -38,6 +38,7 @@ namespace Bank_Project_CSharp.Screens
 
                 if (TryLogin(userName, password))
                 {
+                    Global.CurrentUser.RegisterLogin();
                     clsMainScreen.ShowMainMenu();
                     return true;
                 }
