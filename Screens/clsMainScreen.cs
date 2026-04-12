@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bank_Project_CSharp.Core;
+using System;
 
 namespace Bank_Project_CSharp.Screens
 {
@@ -103,11 +104,9 @@ namespace Bank_Project_CSharp.Screens
             GoBackToMainMenu();
         }
 
-        private static void ShowLogoutScreen()
+        private static void Logout()
         {
-            Console.Clear();
-            DrawScreenHeader("LOGOUT SCREEN", width: 45);
-            Console.WriteLine("Logout Screen will be here.");
+            Global.CurrentUser = clsUser.Find("", "");
         }
 
         private static void PerformMainMenuOption(enMainMenuOptions mainMenuOption)
@@ -143,7 +142,7 @@ namespace Bank_Project_CSharp.Screens
                     break;
 
                 case enMainMenuOptions.eLogout:
-                    ShowLogoutScreen();
+                    Logout();
                     break;
             }
         }
