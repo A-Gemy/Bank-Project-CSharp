@@ -5,6 +5,15 @@ namespace Bank_Project_CSharp.Screens
 {
     internal class clsScreen
     {
+        private static string GetSystemInfoLine(int width)
+        {
+            string userName = Global.CurrentUser.IsEmptyUser ? "N/A" : Global.CurrentUser.UserName;
+            string currentDate = DateTime.Now.ToString("dd-MM-yyyy");
+
+            string info = $"User: {userName}     Date: {currentDate}";
+            return CenterText(info, width);
+        }
+
         protected static void DrawScreenHeader(string title, string subTitle = "", int width = 80)
         {
             string border = new string('=', width);
@@ -18,6 +27,7 @@ namespace Bank_Project_CSharp.Screens
                 Console.WriteLine(CenterText(subTitle, width));
             }
 
+            Console.WriteLine(GetSystemInfoLine(width));
             Console.WriteLine(border);
             Console.WriteLine();
         }
