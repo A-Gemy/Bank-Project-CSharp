@@ -377,6 +377,23 @@ namespace Bank_Project_CSharp.Core
             return true;
         }
 
+        public bool Transfer(decimal amount, clsBankClient destinationClient)
+        {
+            if (IsEmpty || destinationClient == null || destinationClient.IsEmptyClient)
+                return false;
+
+            if (amount <= 0 || amount > AccountBalance)
+                return false;
+
+            if (AccountNumber == destinationClient.AccountNumber)
+                return false;
+
+            this.Withdraw(amount);
+            destinationClient.Deposit(amount);
+
+            return true;
+        }
+
         #endregion
 
 

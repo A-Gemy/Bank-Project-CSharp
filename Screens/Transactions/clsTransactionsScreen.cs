@@ -10,17 +10,18 @@ namespace Bank_Project_CSharp.Screens
             eDeposit = 1,
             eWithdraw = 2,
             eShowTotalBalances = 3,
-            eShowMainMenu = 4
+            eTransfer = 4,
+            eShowMainMenu = 5
         }
 
         private static short ReadTransactionsMenuOption()
         {
             short choice;
 
-            Console.Write("Choose what do you want to do? [1 to 4]? ");
-            while (!short.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 4)
+            Console.Write("Choose what do you want to do? [1 to 5]? ");
+            while (!short.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > 5)
             {
-                Console.Write("Invalid choice, enter a number between 1 and 4: ");
+                Console.Write("Invalid choice, enter a number between 1 and 5: ");
             }
 
             return choice;
@@ -37,7 +38,8 @@ namespace Bank_Project_CSharp.Screens
             Console.WriteLine("   [1] Deposit");
             Console.WriteLine("   [2] Withdraw");
             Console.WriteLine("   [3] Total Balances");
-            Console.WriteLine("   [4] Main Menu");
+            Console.WriteLine("   [4] Transfer");
+            Console.WriteLine("   [5] Main Menu");
             Console.WriteLine(border);
         }
 
@@ -69,6 +71,13 @@ namespace Bank_Project_CSharp.Screens
             GoBackToTransactionsMenu();
         }
 
+        private static void ShowTransferScreen()
+        {
+            Console.Clear();
+            clsTransferScreen.ShowTransferScreen();
+            GoBackToTransactionsMenu();
+        }
+
         private static void PerformTransactionsMenuOption(enTransactionsMenuOptions transactionsMenuOption)
         {
             switch (transactionsMenuOption)
@@ -83,6 +92,10 @@ namespace Bank_Project_CSharp.Screens
 
                 case enTransactionsMenuOptions.eShowTotalBalances:
                     ShowTotalBalancesScreen();
+                    break;
+
+                case enTransactionsMenuOptions.eTransfer:
+                    ShowTransferScreen();
                     break;
 
                 case enTransactionsMenuOptions.eShowMainMenu:
