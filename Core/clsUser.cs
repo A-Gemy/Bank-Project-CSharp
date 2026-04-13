@@ -31,6 +31,7 @@ namespace Bank_Project_CSharp.Core
             pFindClient = 16,
             pTransactions = 32,
             pManageUsers = 64,
+            pLoginRegister = 128,
         }
 
         #endregion

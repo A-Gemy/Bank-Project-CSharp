@@ -123,6 +123,9 @@ namespace Bank_Project_CSharp.Screens
             if (ReadYesNo("\nManage Users? y/n? "))
                 permissions |= (int)clsUser.enPermissions.pManageUsers;
 
+            if (ReadYesNo("\nShow Login Register? y/n? "))
+                permissions |= (int)clsUser.enPermissions.pLoginRegister;
+
             return permissions;
         }
 

@@ -73,6 +73,9 @@ namespace Bank_Project_CSharp.Screens
 
         public static void ShowLoginRegisterScreen()
         {
+            if (!CheckAccessRights(clsUser.enPermissions.pLoginRegister))
+                return;
+
             List<string[]> records = clsUser.GetLoginRegisterList();
 
             DrawScreenHeader("LOGIN REGISTER SCREEN", width: GetLoginRegisterHeader().Length);
