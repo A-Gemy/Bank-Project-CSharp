@@ -11,6 +11,10 @@ namespace Bank_Project_CSharp.Core
 
         private static readonly string _FileName =
             Path.Combine(AppContext.BaseDirectory, "Core", "Clients.txt");
+
+        private static readonly string _TransferLogFileName =
+            Path.Combine(AppContext.BaseDirectory, "Core", "TransferLog.txt");
+
         private const string _Separator = "#//#";
 
         internal enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
@@ -216,6 +220,33 @@ namespace Bank_Project_CSharp.Core
             _AccountBalance = 0m;
         }
 
+        private string _ConvertTransferLogLine(clsBankClient destinationClient, decimal amount, string userName)
+        {
+            return string.Join(_Separator,
+                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                AccountNumber,
+                destinationClient.AccountNumber,
+                amount.ToString(),
+                AccountBalance.ToString(),
+                destinationClient.AccountBalance.ToString(),
+                userName
+            );
+        }
+
+        private void _RegisterTransferLog(clsBankClient destinationClient, decimal amount, string userName)
+        {
+            string folder = Path.GetDirectoryName(_TransferLogFileName);
+            if (!string.IsNullOrEmpty(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            using (StreamWriter writer = new StreamWriter(_TransferLogFileName, true))
+            {
+                writer.WriteLine(_ConvertTransferLogLine(destinationClient, amount, userName));
+            }
+        }
+
         #endregion
 
 
@@ -377,7 +408,7 @@ namespace Bank_Project_CSharp.Core
             return true;
         }
 
-        public bool Transfer(decimal amount, clsBankClient destinationClient)
+        public bool Transfer(decimal amount, clsBankClient destinationClient, string userName)
         {
             if (IsEmpty || destinationClient == null || destinationClient.IsEmptyClient)
                 return false;
@@ -388,9 +419,13 @@ namespace Bank_Project_CSharp.Core
             if (AccountNumber == destinationClient.AccountNumber)
                 return false;
 
-            this.Withdraw(amount);
-            destinationClient.Deposit(amount);
+            if (!this.Withdraw(amount))
+                return false;
 
+            if (!destinationClient.Deposit(amount))
+                return false;
+
+            _RegisterTransferLog(destinationClient, amount, userName);
             return true;
         }
 

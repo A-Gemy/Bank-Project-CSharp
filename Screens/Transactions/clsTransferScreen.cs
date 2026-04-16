@@ -83,7 +83,7 @@ namespace Bank_Project_CSharp.Screens
 
             if (answer == 'y')
             {
-                if (sourceClient.Transfer(amount, destinationClient))
+                if (sourceClient.Transfer(amount, destinationClient, Global.CurrentUser.UserName))
                 {
                     Console.WriteLine("\nTransfer done successfully.");
                     PrintClient(sourceClient);
