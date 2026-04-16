@@ -146,6 +146,29 @@ namespace Bank_Project_CSharp.Core
             return clients;
         }
 
+        private static List<string[]> _LoadTransferLogList()
+        {
+            List<string[]> transferLogs = new List<string[]>();
+
+            if (!File.Exists(_TransferLogFileName))
+                return transferLogs;
+
+            string[] lines = File.ReadAllLines(_TransferLogFileName);
+
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                string[] transferData = line.Split(new string[] { _Separator }, StringSplitOptions.None);
+
+                if (transferData.Length == 7)
+                    transferLogs.Add(transferData);
+            }
+
+            return transferLogs;
+        }
+
         private string _ConvertClientToLine()
         {
             return string.Join(_Separator,
@@ -311,6 +334,11 @@ namespace Bank_Project_CSharp.Core
             }
 
             return totalBalances;
+        }
+
+        public static List<string[]> GetTransferLogList()
+        {
+            return _LoadTransferLogList();
         }
 
         #endregion
